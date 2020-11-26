@@ -66,7 +66,7 @@ box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.24);
     margin: 20px 0;
 }   
 
-.main-info{
+.main-info, .feature-container{
     box-sizing: border-box;
     padding: 10px 20px
 }
@@ -81,6 +81,52 @@ box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.24);
     font-weight: 900;
     padding: 20px 0;
     margin-left: 10px;
+}
+
+/***DETAILS PAGE ELEMENTS***/
+
+.details-info{
+    margin-bottom: 40px;
+}
+
+.details-model{
+    font-size: 36px;
+}
+
+.details-price{
+    margin-top: 20px;
+    font-size: 26px;
+}
+
+.details-desc{
+    margin: 20px 0;
+}
+
+.feature-container{
+    background-color: rgb(236, 236, 236);
+}
+
+
+.feature-container h3{
+    color: var(--red);
+}
+
+.feature-container h3:last-child{
+    margin-top: 40px;
+}
+
+.main-feature, .extra-feature{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.main-feature>p, .extra-feature>p{
+    margin: 10px;
+}
+
+.back{
+    cursor: pointer;
 }
 
 @media (min-width: 700px){

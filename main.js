@@ -64,29 +64,66 @@ function appendDetails(carId){
             <img src="${specificCarDetails.images}" alt="${specificCarDetails.title}">
             <div class="initials-container">
                 <div class="brand-model">
-                    <h2 class="car-brand">${specificCarDetails.initials.brand}</h2>
-                    <p class="car-model">${specificCarDetails.title}</p>
-                    <p class="car-model">Variant: ${specificCarDetails.initials.variant}</p>
+                    <h2 class="car-brand details-header">${specificCarDetails.initials.brand}</h2>
+                    <p class="car-model details-model">${specificCarDetails.title}</p>
+                    <p class="car-model details-variant">${getData("Variant: ",specificCarDetails.initials.variant)}</p>
                     <p class="car-model">Segment: ${specificCarDetails.initials.segment}</p>
+                    <p class="car-price details-price"><i class="fas fa-dollar-sign"></i> ${specificCarDetails.initials.price} DKK</p>
                 </div>
-                <p class="car-model">Description: ${specificCarDetails.description}</p>
-                <p class="car-model">Main: ${specificCarDetails.main.Rækkevide.data} ${specificCarDetails.main.Rækkevide.after}</p>
-                <p class="car-model">Battery: ${specificCarDetails.main.Batteri.data} ${specificCarDetails.main.Batteri.after}</p>
-                <p class="car-model">Garanti: ${specificCarDetails.main.Garanti}</p>
-                <p class="car-model">0-100 km/h: </p>
-                <p class="car-model">Weight: ${specificCarDetails.main.Vægt.data} ${specificCarDetails.main.Vægt.after}</p>
-
-                <p>EXTRA</p>
+                <p class="car-model details-desc">${getData("Description: ", specificCarDetails.description)}</p>
                 
             </div>
-            <p class="car-price"><i class="fas fa-dollar-sign"></i> ${specificCarDetails.initials.price} DKK</p>
+        </div>
+        <div class="feature-container">
+            <h3>Main features</h3>
+            <div class="main-feature">
+                <p class="car-model">Range: ${getData(specificCarDetails.main.Rækkevide.data)} ${specificCarDetails.main.Rækkevide.after}</p>
+                <p class="car-model">Battery: ${specificCarDetails.main.Batteri.data} ${specificCarDetails.main.Batteri.after}</p>
+                <p class="car-model">Garanti: ${specificCarDetails.main.Garanti.data}</p>
+                <p class="car-model">0-100 km/h: </p>
+                <p class="car-model">Weight: ${specificCarDetails.main.Vægt.data} ${specificCarDetails.main.Vægt.after}</p>
+            </div>
+            <h3>Extra features</h3>
+            <div class="extra-feature">
+                <p class="car-model">${specificCarDetails.extra["Træk på krog"]}</p>
+                <p class="car-model">${specificCarDetails.extra["Maksimum hastighed"]}</p>
+                <p class="car-model">${specificCarDetails.extra.Opladning}</p>
+                <p class="car-model">${specificCarDetails.extra["Opladning (hurtig)"]}</p>
+                
+            </div>
         </div>
     </article>
     `
-    
+    //<p class="car-model">: ${specificCarDetails.extra.Opladnin(hurtig)}</p>
     
     document.querySelector(".container").style.display = "none";
-    document.querySelector(".header").style.display = "none";
-    document.querySelector(".main-header").innerHTML = "<span class='back'>Go back</span>";
+    document.querySelector(".main-header").innerHTML = "<h1 class='back' onclick='backToList()'><i class='fas fa-angle-left'></i> Go back</h1>";
     document.querySelector(".details").innerHTML = htmlDetailsTemplate;
+}
+
+function getData(name, exactData){
+    if (exactData){
+        return [name, exactData];
+    }   else if(exactData === null){
+        return "";
+    }   else {
+        return "";
+    }
+}
+
+/*
+function showImg(images){
+    for (const image of images) {
+        let htmlImageTemplate = "";
+        htmlImageTemplate = `
+            <img src="${image}" alt="image">
+        `
+    }
+}
+*/
+function backToList(){
+    document.querySelector(".details").style.display = "none";
+    document.querySelector(".container").style.display = "flex";
+    document.querySelector(".main-header").innerHTML = "<h1>Check our electrical cars</h1>";
+    console.log("click");
 }
