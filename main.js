@@ -4,7 +4,7 @@ let _cars = [];
 //Getting data from JSON file
 async function loadData(){
     let data = await fetch ('http://duckwise.net/assignments/frontend-internship/cars.json').then(res => res.json());
-    console.log(data);
+    // console.log(data);
     _cars = data.data;
 
     appendCars(_cars);
@@ -47,7 +47,7 @@ function appendCars(cars){
 
 //Display details info
 function appendDetails(carId){
-    console.log(carId);
+    // console.log(carId);
     
     let specificCarDetails = "";
     for (let car of _cars) {
@@ -55,23 +55,22 @@ function appendDetails(carId){
             specificCarDetails = car;
         }
     }
-    console.log(specificCarDetails.title);
-    
+    // console.log(specificCarDetails.title);
+    let checkData = (exactData, label) => (exactData.data) ? label + exactData.data + exactData.after : '' ;
     let htmlDetailsTemplate = "";
     htmlDetailsTemplate += `
     <article class="details-info">
         <div class="main-info">
-            <div class="images">${showImg(specificCarDetails.images)}</div>
             <img src="${specificCarDetails.images}" alt="${specificCarDetails.title}">
             <div class="initials-container">
                 <div class="brand-model">
                     <h2 class="car-brand details-header">${specificCarDetails.initials.brand}</h2>
                     <p class="car-model details-model">${specificCarDetails.title}</p>
-                    <span><p class="car-model details-variant">Variant: ${getData(this, specificCarDetails.initials.variant)}</p></span>
+                    <p class="car-model details-variant">${getData("Variant: ",specificCarDetails.initials.variant)}</p>
                     <p class="car-model">Segment: ${specificCarDetails.initials.segment}</p>
                     <p class="car-price details-price"><i class="fas fa-dollar-sign"></i> ${specificCarDetails.initials.price} DKK</p>
                 </div>
-                <p class="car-model details-desc">DESC: ${getData(specificCarDetails.description)}</p>
+                <p class="car-model details-desc">${getData("Description: ", specificCarDetails.description)}</p>
                 
             </div>
         </div>
@@ -79,7 +78,7 @@ function appendDetails(carId){
             <h3>Main features</h3>
             <div class="main-feature">
                 <p class="car-model">Range: ${getData(specificCarDetails.main.Rækkevide.data)} ${specificCarDetails.main.Rækkevide.after}</p>
-                <p class="car-model">Battery: ${specificCarDetails.main.Batteri.data} ${specificCarDetails.main.Batteri.after}</p>
+                <p class="car-model">${checkData(specificCarDetails.main.Batteri,'Battery:')} </p>
                 <p class="car-model">Garanti: ${specificCarDetails.main.Garanti.data}</p>
                 <p class="car-model">0-100 km/h: </p>
                 <p class="car-model">Weight: ${specificCarDetails.main.Vægt.data} ${specificCarDetails.main.Vægt.after}</p>
@@ -96,47 +95,38 @@ function appendDetails(carId){
     </article>
     `
     //<p class="car-model">: ${specificCarDetails.extra.Opladnin(hurtig)}</p>
-    
     document.querySelector(".container").style.display = "none";
     document.querySelector(".main-header").innerHTML = "<h1 class='back' onclick='backToList()'><i class='fas fa-angle-left'></i> Go back</h1>";
     document.querySelector(".details").innerHTML = htmlDetailsTemplate;
 }
 
-function getData(exactData){
-    console.log(event.target);
+
+function getData(exactData,event){
+    console.log(event);
     if (exactData){
         return exactData;
     }   else if(exactData === null){
         
-        event.target.parentElement.remove();
+        // event.target.parentElement.remove();
     }   else {
-        event.target.parentElement.remove();
+        // event.target.parentElement.remove();
     }
 }
 
 
+/*
 function showImg(images){
-     console.log(images);
-     console.log("uploaded");
-     if (images){
-        let htmlImgTemplate = "";
-        for (let image of images) {
-            htmlImgTemplate += `
-            <img src="${image}" alt="img">`  
-        }
-        
-        return htmlImgTemplate;
-         
-     }  else {
-         return "";
-     }
-     
-    
-};
-
+    for (const image of images) {
+        let htmlImageTemplate = "";
+        htmlImageTemplate = `
+            <img src="${image}" alt="image">
+        `
+    }
+}
+*/
 function backToList(){
     document.querySelector(".details").style.display = "none";
     document.querySelector(".container").style.display = "flex";
     document.querySelector(".main-header").innerHTML = "<h1>Check our electrical cars</h1>";
-    console.log("click");
+    // console.log("click");
 }
