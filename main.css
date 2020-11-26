@@ -129,6 +129,21 @@ box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.24);
     cursor: pointer;
 }
 
+.images{
+    display: flex;
+    width: 100%;
+}
+
+.images img{
+    max-width: 33.3%;
+}
+
+
+
+.hide{
+    display: none;
+}
+
 @media (min-width: 700px){
     .container{
         max-width: 1100px;

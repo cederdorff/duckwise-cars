@@ -61,16 +61,17 @@ function appendDetails(carId){
     htmlDetailsTemplate += `
     <article class="details-info">
         <div class="main-info">
+            <div class="images">${showImg(specificCarDetails.images)}</div>
             <img src="${specificCarDetails.images}" alt="${specificCarDetails.title}">
             <div class="initials-container">
                 <div class="brand-model">
                     <h2 class="car-brand details-header">${specificCarDetails.initials.brand}</h2>
                     <p class="car-model details-model">${specificCarDetails.title}</p>
-                    <p class="car-model details-variant">${getData("Variant: ",specificCarDetails.initials.variant)}</p>
+                    <span><p class="car-model details-variant">Variant: ${getData(this, specificCarDetails.initials.variant)}</p></span>
                     <p class="car-model">Segment: ${specificCarDetails.initials.segment}</p>
                     <p class="car-price details-price"><i class="fas fa-dollar-sign"></i> ${specificCarDetails.initials.price} DKK</p>
                 </div>
-                <p class="car-model details-desc">${getData("Description: ", specificCarDetails.description)}</p>
+                <p class="car-model details-desc">DESC: ${getData(specificCarDetails.description)}</p>
                 
             </div>
         </div>
@@ -101,26 +102,38 @@ function appendDetails(carId){
     document.querySelector(".details").innerHTML = htmlDetailsTemplate;
 }
 
-function getData(name, exactData){
+function getData(exactData){
+    console.log(event.target);
     if (exactData){
-        return [name, exactData];
+        return exactData;
     }   else if(exactData === null){
-        return "";
+        
+        event.target.parentElement.remove();
     }   else {
-        return "";
+        event.target.parentElement.remove();
     }
 }
 
-/*
+
 function showImg(images){
-    for (const image of images) {
-        let htmlImageTemplate = "";
-        htmlImageTemplate = `
-            <img src="${image}" alt="image">
-        `
-    }
-}
-*/
+     console.log(images);
+     console.log("uploaded");
+     if (images){
+        let htmlImgTemplate = "";
+        for (let image of images) {
+            htmlImgTemplate += `
+            <img src="${image}" alt="img">`  
+        }
+        
+        return htmlImgTemplate;
+         
+     }  else {
+         return "";
+     }
+     
+    
+};
+
 function backToList(){
     document.querySelector(".details").style.display = "none";
     document.querySelector(".container").style.display = "flex";
