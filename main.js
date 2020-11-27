@@ -12,7 +12,7 @@ async function loadData(){
 
 loadData();
 
-//Display all cars
+//Display all cars 
 function appendCars(cars){
     let htmlTemplate = "";
     for (let car of cars) {
